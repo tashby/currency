@@ -1,26 +1,34 @@
-console.log(process.argv);
 
 var listOfCoins = process.argv[3]; // 'Quarter,25,Dime,10,...
+var money = parseInt(process.argv[2]);
 var coinNamesAndValues = listOfCoins.split(','); //['Quarter', '25', 'Dime', '10']
 var numberOfCoins = coinNamesAndValues.length / 2
 
-var coinNames = getOdd(coinNamesAndValues);
-var coinValues = getEven(coinNamesAndValues);
+var coinNames = getEven(coinNamesAndValues);
+var coinStrings = getOdd(coinNamesAndValues);
+var coinValues = coinStrings.map(x => parseInt(x));
 
-function printCombinations(money, coins, usages, coinIndex) {
-   //Things to do
+function findCombinations(money, coins, usages, coinIndex) {
     if (money == 0) {
-      return 1;
+      return [usages];
+    }
+    else if (coins.length == 0 || money < 0) {
+      return [];
+    }
+    else {
+      var updatedUsages = usages.slice(0);
+      updatedUsages[coinIndex]++;
+      return findCombinations(money - coins[0], coins, updatedUsages, coinIndex)
+      .concat(findCombinations(money, coins.slice(1), usages, coinIndex+1));
     }
 }
-
-printCombinations(money, coinValues, [].fill(0, 0, numberOfCoins), 0);
-
+var combinations = findCombinations(money, coinValues, new Array(numberOfCoins).fill(0), 0);
+console.log(combinations);
 
 function getOdd(arr) {
   return arr.reduce((acc, cur, idx) => {
-    if(idx % 1 == 0){
-      return acc.push(cur);
+    if(idx % 2 == 1){
+      return acc.concat([cur]);
     }
     else return acc;
   }, []);
@@ -29,7 +37,7 @@ function getOdd(arr) {
 function getEven(arr) {
   return arr.reduce((acc, cur, idx) => {
     if(idx % 2 == 0){
-      return acc.push(cur);
+      return acc.concat([cur]);
     }
     else return acc;
   }, []);
@@ -37,9 +45,4 @@ function getEven(arr) {
 
 
 //Things to do:
-// FIX ***TypeError: Cannot read property 'split' of undefined
-// 1. Add recursion in printCombinations
-// 2. Add coinIndex increment
-// 3. Add usages[?] increment
-// 4. Add solution at money == 0
-// 5. Add printout when recursion ends.
+// foreach on js array for coin values
