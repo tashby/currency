@@ -17,7 +17,8 @@ ex.
 ```
 node index.js 100 Quarter,25,Dime,10,Nickel,5,Penny,1
 ```
-**(One space after the Total Amount. No Spaces between the coins, commas, and values)**
+**(One space after the Total Amount.**
+# No Spaces between the coins, commas, and values)
 
 ex.
 ```
