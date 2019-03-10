@@ -23,6 +23,7 @@ function findCombinations(money, coins, usages, coinIndex) {
     }
 }
 var combinations = findCombinations(money, coinValues, new Array(numberOfCoins).fill(0), 0);
+console.log(coinNames)
 console.log(combinations);
 
 function getOdd(arr) {
