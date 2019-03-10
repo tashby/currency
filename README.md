@@ -13,6 +13,8 @@ Input a command line prompt of **node, filename, Total Amount,** then **coins** 
 
 Please input **1** Total Amount, **4** coins, and **4** respective values.
 
+Please input a total amount that is divisible by 5. Coin values don't matter.
+
 ex.
 ```
 node index.js 100 Quarter,25,Dime,10,Nickel,5,Penny,1
